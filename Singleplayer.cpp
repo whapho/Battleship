@@ -31,7 +31,7 @@ void displayGameBoard() {
                     cout << "* ";
                     break;
                 case 1:
-                    cout << "X ";
+                    cout << "* ";
                     break;
                 case 2:
                     cout << "M ";
@@ -87,16 +87,23 @@ bool checkForShips() {
 }
 
 void startSingleplayerGame() {
-    int x, y;
+    int x, y, input = 1;
     createGameBoard();
     placeRandomShips();
-    while (!gameOver(gameBoard)) {
+    while (!gameOver(gameBoard, 0)) {
         system("cls");
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> x >> y;
-        aimbot(gameBoard);
-//        fire(x, y, gameBoard);
-        gameOver(gameBoard);
+        fire(x, y, gameBoard);
+        gameOver(gameBoard, 0);
     }
+    while (input != 0) {
+        system("cls");
+        displayGameBoard();
+        cout << "You win!" << endl;
+        cout << "[0] Done" << endl;
+        cin >> input;
+    }
+    mainMenu();
 }

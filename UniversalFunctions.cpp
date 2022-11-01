@@ -1,5 +1,4 @@
 #include "Battleship.h"
-#include <iostream>
 
 using namespace std;
 
@@ -10,15 +9,19 @@ void fire(int x, int y, int *board) {
         *(board + (x-1) * COLS + (y-1)) = 3;
 }
 
-bool gameOver(int *board) {
-    int hits;
+bool gameOver(int *board, int mode) {
+    int count, hit;
+    if (mode == 0)
+        hit = 3;
+    else
+        hit = 7;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            if (*board == 3)
-                hits++;
+            if (*(board + i * COLS + j) == hit)
+                count++;
         }
     }
-    if (hits == 17)
+    if (count == 17)
         return true;
 }
 

@@ -22,7 +22,7 @@ void playerOneFire();
 void playerTwoFire();
 void displayPlayerOneBoardHidden();
 void displayPlayerTwoBoardHidden();
-bool gameOver(int *board);
+bool gameOver(int *board, int mode);
 void showStatMenu();
 void showSingleplayerStats();
 void showMultiplayerStats();

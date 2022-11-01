@@ -36,7 +36,7 @@ void mainMenu() {
 
 void newGame() {
     system("cls");
-    cout << "Choose mode" << endl;
+    cout << "Choose gameMode" << endl;
     cout << DIVIDER << endl;
     cout << "[1] Singleplayer" << endl;
     cout << "[2] Multiplayer" << endl;

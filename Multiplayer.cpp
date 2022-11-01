@@ -301,7 +301,7 @@ void playerOneFire() {
         *(playerTwoBoard + (x-1) * COLS + (y-1)) = 7;
         playerOneFire();
     }
-    if (gameOver(playerTwoBoard)) {
+    if (gameOver(playerTwoBoard, 1)) {
         int input = 1;
         while (input != 0) {
             cout << "Player 1 wins!" << endl;
@@ -322,7 +322,7 @@ void playerTwoFire() {
         *(playerOneBoard + (x-1) * COLS + (y-1)) = 7;
         playerTwoFire();
     }
-    if (gameOver(playerOneBoard)) {
+    if (gameOver(playerOneBoard, 1)) {
         int input = 1;
         while (input != 0) {
             cout << "Player 2 wins!" << endl;
