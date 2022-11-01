@@ -67,23 +67,10 @@ void placeRandomShips() {
                 x++;
         }
     }
-    if (!checkForShips()) {
+    if (!checkForShips(gameBoard)) {
         createGameBoard();
         placeRandomShips();
     }
-}
-
-bool checkForShips() {
-    int tileCount = 0;
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            if (*(gameBoard + i * COLS + j) != 0)
-                tileCount++;
-        }
-    }
-    if (tileCount == 17)
-        return true;
-    return false;
 }
 
 void startSingleplayerGame() {
@@ -96,15 +83,14 @@ void startSingleplayerGame() {
         cout << "Enter coordinates: ";
         cin >> x >> y;
         fire(x, y, gameBoard);
-//        aimbot(gameBoard);
         cout << gameOver(gameBoard, 0);
     } while (!gameOver(gameBoard, 0));
-    while (input != 0) {
+    do {
         system("cls");
         displayGameBoard();
         cout << "You win!" << endl;
         cout << "[0] Done" << endl;
         cin >> input;
-    }
+    } while (input != 0);
     mainMenu();
 }

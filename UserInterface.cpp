@@ -4,11 +4,11 @@
 using namespace std;
 
 int menuInput;
-const string DIVIDER = "----------------------------";
+const string DIVIDER = "----------------------------------------";
 
 void mainMenu() {
     system("cls");
-    cout << "Battleship Game" << endl;
+    cout << "Battleship by whapho" << endl;
     cout << DIVIDER << endl;
     cout << "[1] New Game" << endl;
     cout << "[2] Instructions" << endl;
