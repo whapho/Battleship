@@ -91,17 +91,36 @@ void fire(int x, int y) {
         *(gameBoard + (x-1) * COLS + (y-1)) = 2;
     else
         *(gameBoard + (x-1) * COLS + (y-1)) = 3;
+    if (gameOver(gameBoard)) {
+        int input = 1;
+        while (input != 0) {
+            cout << "You win!" << endl;
+            cout << "[0] Done" << endl;
+            cin >> input;
+        } input = 1;
+    }
+}
+
+bool gameOver(int *board) {
+    int hits;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (*board == 3)
+                hits++;
+        }
+    }
+    if (hits == 17)
+        return true;
 }
 
 void startSingleplayerGame() {
-    int inputX = 1, inputY = 1;
+    int inputX, inputY;
     createGameBoard();
     placeRandomShips();
-    while (inputX != 0) {
+    while (!gameOver(gameBoard)) {
         displayGameBoard();
-        cout << "Enter X and Y coords: ";
+        cout << "Enter coordinates: ";
         cin >> inputX >> inputY;
         fire(inputX, inputY);
     }
-    mainMenu();
 }

@@ -332,18 +332,6 @@ void playerTwoFire() {
     }
 }
 
-bool gameOver(int *board) {
-    int count;
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            if (*board == 7)
-                count++;
-        }
-    }
-    if (count == 17)
-        return true;
-}
-
 void startMultiplayerGame() {
     int input = 1;
     createPlayerOneBoard();
