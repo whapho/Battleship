@@ -3,15 +3,17 @@
 
 using namespace std;
 
-int gameBoard[10][10];
 const string DISPLAY[10] = {
         " 1 ", " 2 ", " 3 ", " 4 ", " 5 ",
         " 6 ", " 7 ", " 8 ", " 9 ", "10 "
 };
+
+int* gameBoard = new int[ROWS * COLS];
+
 void createGameBoard() {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            gameBoard[i][j] = 0;
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            *(gameBoard + i * COLS + j) = 0;
         }
     }
 }
@@ -20,16 +22,16 @@ void displayGameBoard() {
     system("cls");
     int num;
     cout << "   1 2 3 4 5 6 7 8 9 10" << endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < ROWS; i++) {
         cout << DISPLAY[i];
-        for (int j = 0; j < 10; j++) {
-            num = gameBoard[i][j];
+        for (int j = 0; j < COLS; j++) {
+            num = *(gameBoard + i * COLS + j);
             switch (num) {
                 case 0:
                     cout << "* ";
                     break;
                 case 1:
-                    cout << "* ";
+                    cout << "X ";
                     break;
                 case 2:
                     cout << "M ";
@@ -58,7 +60,7 @@ void placeRandomShips() {
             y = rand() % 10;
         }
         for (int j = 0; j < shipLength; j++) {
-            gameBoard[x][y] = 1;
+            *(gameBoard + x * COLS + y) = 1;
             if (orientation == 0)
                 y++;
             else if (orientation == 1)
@@ -75,7 +77,7 @@ bool checkForShips() {
     int tileCount = 0;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            if (gameBoard[i][j] != 0)
+            if (*(gameBoard + i * COLS + j) != 0)
                 tileCount++;
         }
     }
@@ -85,10 +87,10 @@ bool checkForShips() {
 }
 
 void fire(int x, int y) {
-    if (gameBoard[x][y] == 0)
-        gameBoard[x][y] = 2;
+    if (*(gameBoard + (x-1) * COLS + (y-1)) == 0)
+        *(gameBoard + (x-1) * COLS + (y-1)) = 2;
     else
-        gameBoard[x][y] = 3;
+        *(gameBoard + (x-1) * COLS + (y-1)) = 3;
 }
 
 void startSingleplayerGame() {

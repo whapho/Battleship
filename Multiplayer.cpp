@@ -3,12 +3,29 @@
 
 using namespace std;
 
-int playerOneBoard[10][10];
-int playerTwoBoard[10][10];
 const string DISPLAY[10] = {
         " 1 ", " 2 ", " 3 ", " 4 ", " 5 ",
         " 6 ", " 7 ", " 8 ", " 9 ", "10 "
 };
+
+int* playerOneBoard = new int[ROWS * COLS];
+int* playerTwoBoard = new int[ROWS * COLS];
+
+void createPlayerOneBoard() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            *(playerOneBoard + i * COLS + j) = 0;
+        }
+    }
+}
+
+void createPlayerTwoBoard() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            *(playerTwoBoard + i * COLS + j) = 0;
+        }
+    }
+}
 
 void displayPlayerOneBoard() {
     system("cls");
@@ -17,7 +34,7 @@ void displayPlayerOneBoard() {
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
-            num = playerOneBoard[i][j];
+            num = *(playerOneBoard + i * COLS + j);
             switch (num) {
                 case 0:
                     cout << "* ";
@@ -59,7 +76,7 @@ void displayPlayerOneBoardHidden() {
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
-            num = playerOneBoard[i][j];
+            num = *(playerOneBoard + i * COLS + j);
             switch (num) {
                 case 0:
                     cout << "* ";
@@ -93,14 +110,6 @@ void displayPlayerOneBoardHidden() {
     }
 }
 
-void createPlayerOneBoard() {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            playerOneBoard[i][j] = 0;
-        }
-    }
-}
-
 void placePlayerOneShips() {
     system("cls");
     displayPlayerOneBoard();
@@ -113,7 +122,7 @@ void placePlayerOneShips() {
         cout << "Enter starting coordinates for ship: ";
         cin >> x >> y;
         for (int j = 0; j < shipLength; j++) {
-            playerOneBoard[x][y] = i + 1;
+            *(playerOneBoard + (x-1) * COLS + (y-1)) = i + 1;
             if (orientation == "h")
                 y++;
             else if (orientation == "v")
@@ -141,7 +150,7 @@ bool checkPlayerOneBoard() {
     int tileCount = 0;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            if (playerOneBoard[i][j] != 0)
+            if (*(playerOneBoard + i * COLS + j) != 0)
                 tileCount++;
         }
     }
@@ -157,7 +166,7 @@ void displayPlayerTwoBoard() {
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
-            num = playerTwoBoard[i][j];
+            num = *(playerTwoBoard + i * COLS + j);
             switch (num) {
                 case 0:
                     cout << "* ";
@@ -198,7 +207,7 @@ void displayPlayerTwoBoardHidden() {
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
-            num = playerTwoBoard[i][j];
+            num = *(playerTwoBoard + i * COLS + j);
             switch (num) {
                 case 0:
                     cout << "* ";
@@ -232,14 +241,6 @@ void displayPlayerTwoBoardHidden() {
     }
 }
 
-void createPlayerTwoBoard() {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            playerTwoBoard[i][j] = 0;
-        }
-    }
-}
-
 void placePlayerTwoShips() {
     system("cls");
     displayPlayerTwoBoard();
@@ -252,7 +253,7 @@ void placePlayerTwoShips() {
         cout << "Enter starting coordinates for ship: ";
         cin >> x >> y;
         for (int j = 0; j < shipLength; j++) {
-            playerTwoBoard[x][y] = i + 1;
+            *(playerTwoBoard + (x-1) * COLS + (y-1)) = i + 1;
             if (orientation == "h")
                 y++;
             else if (orientation == "v")
@@ -280,7 +281,7 @@ bool checkPlayerTwoBoard() {
     int tileCount = 0;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            if (playerTwoBoard[i][j] != 0)
+            if (*(playerTwoBoard + i * COLS + j) != 0)
                 tileCount++;
         }
     }
@@ -294,20 +295,20 @@ void playerOneFire() {
     displayPlayerTwoBoardHidden();
     cout << "Enter coordinates: ";
     cin >> x >> y;
-    if (playerTwoBoard[x][y] == 0) {
-        playerTwoBoard[x][y] = 6;
+    if (*(playerTwoBoard + (x-1) * COLS + (y-1)) == 0) {
+        *(playerTwoBoard + (x-1) * COLS + (y-1)) = 6;
     } else {
-        playerTwoBoard[x][y] = 7;
+        *(playerTwoBoard + (x-1) * COLS + (y-1)) = 7;
         playerOneFire();
     }
-//    if (gameOver(playerTwoBoard)) {
-//        int input = 1;
-//        while (input != 0) {
-//            cout << "Player 1 wins!" << endl;
-//            cout << "[0] Done" << endl;
-//            cin >> input;
-//        } input = 1;
-//    }
+    if (gameOver(playerTwoBoard)) {
+        int input = 1;
+        while (input != 0) {
+            cout << "Player 1 wins!" << endl;
+            cout << "[0] Done" << endl;
+            cin >> input;
+        } input = 1;
+    }
 }
 
 void playerTwoFire() {
@@ -315,33 +316,33 @@ void playerTwoFire() {
     displayPlayerOneBoardHidden();
     cout << "Enter coordinates: ";
     cin >> x >> y;
-    if (playerOneBoard[x-1][y-1] == 0) {
-        playerOneBoard[x-1][y-1] = 6;
+    if (*(playerOneBoard + (x-1) * COLS + (y-1)) == 0) {
+        *(playerOneBoard + (x-1) * COLS + (y-1)) = 6;
     } else {
-        playerOneBoard[x-1][y-1] = 7;
+        *(playerOneBoard + (x-1) * COLS + (y-1)) = 7;
         playerTwoFire();
     }
-//    if (gameOver(playerOneBoard)) {
-//        int input = 1;
-//        while (input != 0) {
-//            cout << "Player 2 wins!" << endl;
-//            cout << "[0] Done" << endl;
-//            cin >> input;
-//        } input = 1;
-//    }
+    if (gameOver(playerOneBoard)) {
+        int input = 1;
+        while (input != 0) {
+            cout << "Player 2 wins!" << endl;
+            cout << "[0] Done" << endl;
+            cin >> input;
+        } input = 1;
+    }
 }
 
-//bool gameOver(int board[][]) {
-//    int count;
-//    for (int i = 0; i < 10; i++) {
-//        for (int j = 0; j < 10; j++) {
-//            if (board == 7)
-//                count++;
-//        }
-//    }
-//    if (count == 17)
-//        return true;
-//}
+bool gameOver(int *board) {
+    int count;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (*board == 7)
+                count++;
+        }
+    }
+    if (count == 17)
+        return true;
+}
 
 void startMultiplayerGame() {
     int input = 1;
