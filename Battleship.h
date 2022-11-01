@@ -26,5 +26,7 @@ bool gameOver(int *board);
 void showStatMenu();
 void showSingleplayerStats();
 void showMultiplayerStats();
+void aimbot(int *board);
+void fire(int x, int y, int *board);
 const int SHIP_LENGTHS[5] = {2,3,3,4,5};
 const int ROWS = 10, COLS = 10;

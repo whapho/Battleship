@@ -67,6 +67,12 @@ build CMakeFiles/Battleship.dir/Multiplayer.cpp.obj: CXX_COMPILER__Battleship_De
   OBJECT_DIR = CMakeFiles\Battleship.dir
   OBJECT_FILE_DIR = CMakeFiles\Battleship.dir
 
+build CMakeFiles/Battleship.dir/UniversalFunctions.cpp.obj: CXX_COMPILER__Battleship_Debug C$:/Users/moose/CLionProjects/Battleship/UniversalFunctions.cpp || cmake_object_order_depends_target_Battleship
+  DEP_FILE = CMakeFiles\Battleship.dir\UniversalFunctions.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\Battleship.dir
+  OBJECT_FILE_DIR = CMakeFiles\Battleship.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Battleship
@@ -75,7 +81,7 @@ build CMakeFiles/Battleship.dir/Multiplayer.cpp.obj: CXX_COMPILER__Battleship_De
 #############################################
 # Link the executable Battleship.exe
 
-build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/UserInterface.cpp.obj CMakeFiles/Battleship.dir/Singleplayer.cpp.obj CMakeFiles/Battleship.dir/Multiplayer.cpp.obj
+build Battleship.exe: CXX_EXECUTABLE_LINKER__Battleship_Debug CMakeFiles/Battleship.dir/UserInterface.cpp.obj CMakeFiles/Battleship.dir/Singleplayer.cpp.obj CMakeFiles/Battleship.dir/Multiplayer.cpp.obj CMakeFiles/Battleship.dir/UniversalFunctions.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Battleship.dir

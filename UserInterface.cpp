@@ -4,7 +4,7 @@
 using namespace std;
 
 int menuInput;
-const string DIVIDER = "-----------------------";
+const string DIVIDER = "----------------------------";
 
 void mainMenu() {
     system("cls");
