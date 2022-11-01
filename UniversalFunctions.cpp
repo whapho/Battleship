@@ -23,6 +23,8 @@ bool gameOver(int *board, int mode) {
     }
     if (count == 17)
         return true;
+    else
+        return false;
 }
 
 void aimbot(int *board) {

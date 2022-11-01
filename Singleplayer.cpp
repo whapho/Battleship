@@ -90,14 +90,15 @@ void startSingleplayerGame() {
     int x, y, input = 1;
     createGameBoard();
     placeRandomShips();
-    while (!gameOver(gameBoard, 0)) {
+    do {
         system("cls");
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> x >> y;
         fire(x, y, gameBoard);
-        gameOver(gameBoard, 0);
-    }
+//        aimbot(gameBoard);
+        cout << gameOver(gameBoard, 0);
+    } while (!gameOver(gameBoard, 0));
     while (input != 0) {
         system("cls");
         displayGameBoard();
