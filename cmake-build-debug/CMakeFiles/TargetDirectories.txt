@@ -1,0 +1,3 @@
+C:/Users/moose/CLionProjects/Battleship/cmake-build-debug/CMakeFiles/Battleship.dir
+C:/Users/moose/CLionProjects/Battleship/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/moose/CLionProjects/Battleship/cmake-build-debug/CMakeFiles/rebuild_cache.dir

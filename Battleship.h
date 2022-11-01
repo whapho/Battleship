@@ -1,0 +1,26 @@
+#pragma once
+void mainMenu();
+void showInstructions();
+void newGame();
+void startSingleplayerGame();
+void createGameBoard();
+void displayGameBoard();
+void placeRandomShips();
+bool checkForShips();
+void showSingleplayerInstructions();
+void showMultiplayerInstructions();
+void startMultiplayerGame();
+void createPlayerOneBoard();
+void createPlayerTwoBoard();
+void placePlayerOneShips();
+void placePlayerTwoShips();
+void displayPlayerOneBoard();
+void displayPlayerTwoBoard();
+bool checkPlayerOneBoard();
+bool checkPlayerTwoBoard();
+void playerOneFire();
+void playerTwoFire();
+void displayPlayerOneBoardHidden();
+void displayPlayerTwoBoardHidden();
+//bool gameOver(int board[][]);
+const int SHIP_LENGTHS[5] = {2,3,3,4,5};
