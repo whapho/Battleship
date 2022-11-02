@@ -77,14 +77,15 @@ void startSingleplayerGame() {
     int x, y, input = 1;
     createGameBoard();
     placeRandomShips();
-    do {
+    while (!gameOver(gameBoard, 0)) {
         system("cls");
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> x >> y;
         fire(x, y, gameBoard);
+        aimbot(gameBoard);
         cout << gameOver(gameBoard, 0);
-    } while (!gameOver(gameBoard, 0));
+    }
     do {
         system("cls");
         displayGameBoard();

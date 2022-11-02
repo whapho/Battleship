@@ -93,7 +93,7 @@ void displayPlayerBoard(int *board, bool hidden) {
 
 void placePlayerShips(int *board) {
     system("cls");
-    displayPlayerBoard(playerOneBoard, false);
+    displayPlayerBoard(board, false);
     int input = 1;
     for (int i = 0; i < sizeof(SHIP_LENGTHS)/sizeof(SHIP_LENGTHS[0]); i++) {
         string orientation;
@@ -110,28 +110,23 @@ void placePlayerShips(int *board) {
                 x++;
         }
         system("cls");
-        displayPlayerBoard(playerOneBoard, false);
+        displayPlayerBoard(board, false);
     }
     while (input != 0) {
         cout << "[0] Done" << endl;
         cin >> input;
     } input = 1;
-    if (!checkForShips(playerOneBoard)) {
+    if (!checkForShips(board)) {
         while (input != 0) {
             cout << "Ships out of bounds." << endl;
             cout << "[0] Try again" << endl;
             cin >> input;
         } input = 1;
-        createPlayerBoard(playerOneBoard);
-        placePlayerShips(playerOneBoard);
+        createPlayerBoard(board);
+        placePlayerShips(board);
     }
 }
 
 void startMultiplayerGame() {
-    int input = 1;
-    do {
-        displayPlayerBoard(playerOneBoard, false);
-        cout << "[0] Done" << endl;
-        cin >> input;
-    } while (input != 0);
+
 }
