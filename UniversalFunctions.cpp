@@ -2,7 +2,46 @@
 
 using namespace std;
 
-void fire(int x, int y, int *board) {
+void fire(string coord, int *board) {
+    char letter;
+    int x, y = 0;
+    letter = coord[0];
+    coord.erase(0, 1);
+    x = stoi(coord);
+    switch (letter) {
+        case 'A':
+            y = 1;
+            break;
+        case 'B':
+            y = 2;
+            break;
+        case 'C':
+            y = 3;
+            break;
+        case 'D':
+            y = 4;
+            break;
+        case 'E':
+            y = 5;
+            break;
+        case 'F':
+            y = 6;
+            break;
+        case 'G':
+            y = 7;
+            break;
+        case 'H':
+            y = 8;
+            break;
+        case 'I':
+            y = 9;
+            break;
+        case 'J':
+            y = 10;
+            break;
+        default:
+            break;
+    }
     if (*(board + (x-1) * COLS + (y-1)) == 0)
         *(board + (x-1) * COLS + (y-1)) = 2;
     else
@@ -23,7 +62,7 @@ bool checkForShips(int *board) {
 }
 
 bool gameOver(int *board, int mode) {
-    int count, hit;
+    int count = 0, hit;
     if (mode == 0)
         hit = 3;
     else

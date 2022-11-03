@@ -22,7 +22,7 @@ void createPlayerBoard(int *board) {
 void displayPlayerBoard(int *board, bool hidden) {
     system("cls");
     int num;
-    cout << "   1 2 3 4 5 6 7 8 9 10" << endl;
+    cout << "   A B C D E F G H I J" << endl;
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
@@ -54,6 +54,7 @@ void displayPlayerBoard(int *board, bool hidden) {
                         cout << "H ";
                         break;
                     default:
+                        cout << num << " ";
                         break;
                 }
             } else {
@@ -83,6 +84,7 @@ void displayPlayerBoard(int *board, bool hidden) {
                         cout << "H ";
                         break;
                     default:
+                        cout << num << " ";
                         break;
                 }
             }
@@ -96,18 +98,56 @@ void placePlayerShips(int *board) {
     displayPlayerBoard(board, false);
     int input = 1;
     for (int i = 0; i < sizeof(SHIP_LENGTHS)/sizeof(SHIP_LENGTHS[0]); i++) {
-        string orientation;
-        int x, y, shipLength = SHIP_LENGTHS[i];
+        string orientation, coord;
+        char letter;
+        int x, y = 0, shipLength = SHIP_LENGTHS[i];
         cout << "Ship: " << i + 1 << " || Length: " << SHIP_LENGTHS[i] << endl;
         cout << "Enter orientation: ";
         cin >> orientation;
-        cout << "Enter starting coordinates for ship: ";
-        cin >> x >> y;
+        cout << "Enter starting coordinates: ";
+        cin >> coord;
+        letter = coord[0];
+        coord.erase(0, 1);
+        x = stoi(coord);
+        switch (letter) {
+            case 'A':
+                y = 1;
+                break;
+            case 'B':
+                y = 2;
+                break;
+            case 'C':
+                y = 3;
+                break;
+            case 'D':
+                y = 4;
+                break;
+            case 'E':
+                y = 5;
+                break;
+            case 'F':
+                y = 6;
+                break;
+            case 'G':
+                y = 7;
+                break;
+            case 'H':
+                y = 8;
+                break;
+            case 'I':
+                y = 9;
+                break;
+            case 'J':
+                y = 10;
+                break;
+            default:
+                break;
+        }
         for (int j = 0; j < shipLength; j++) {
             *(board + (x-1) * COLS + (y-1)) = i + 1;
-            if (orientation == "h")
+            if (orientation == "H")
                 y++;
-            else if (orientation == "v")
+            else if (orientation == "V")
                 x++;
         }
         system("cls");
@@ -128,6 +168,9 @@ void placePlayerShips(int *board) {
     }
 }
 
+
 void startMultiplayerGame() {
+    createPlayerBoard(playerOneBoard);
+    createPlayerBoard(playerTwoBoard);
     placePlayerShips(playerOneBoard);
 }

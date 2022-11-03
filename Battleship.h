@@ -1,4 +1,5 @@
 #pragma once
+#include<string>
 void mainMenu();
 void showInstructions();
 void newGame();
@@ -18,6 +19,6 @@ void showStatMenu();
 void showSingleplayerStats();
 void showMultiplayerStats();
 void aimbot(int *board);
-void fire(int x, int y, int *board);
+void fire(std::string coord, int *board);
 const int SHIP_LENGTHS[5] = {2,3,3,4,5};
 const int ROWS = 10, COLS = 10;

@@ -21,7 +21,7 @@ void createGameBoard() {
 void displayGameBoard() {
     system("cls");
     int num;
-    cout << "   1 2 3 4 5 6 7 8 9 10" << endl;
+    cout << "   A B C D E F G H I J" << endl;
     for (int i = 0; i < ROWS; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < COLS; j++) {
@@ -74,16 +74,16 @@ void placeRandomShips() {
 }
 
 void startSingleplayerGame() {
-    int x, y, input = 1;
+    int input = 1;
+    string coord;
     createGameBoard();
     placeRandomShips();
     while (!gameOver(gameBoard, 0)) {
         system("cls");
         displayGameBoard();
         cout << "Enter coordinates: ";
-        cin >> x >> y;
-        fire(x, y, gameBoard);
-        aimbot(gameBoard);
+        cin >> coord;
+        fire(coord, gameBoard);
         cout << gameOver(gameBoard, 0);
     }
     do {
