@@ -98,6 +98,7 @@ void placePlayerShips(int *board) {
     for (int i = 0; i < sizeof(SHIP_LENGTHS)/sizeof(SHIP_LENGTHS[0]); i++) {
         string orientation;
         int x, y, shipLength = SHIP_LENGTHS[i];
+        cout << "Ship: " << i + 1 << " || Length: " << SHIP_LENGTHS[i] << endl;
         cout << "Enter orientation: ";
         cin >> orientation;
         cout << "Enter starting coordinates for ship: ";
@@ -128,5 +129,5 @@ void placePlayerShips(int *board) {
 }
 
 void startMultiplayerGame() {
-
+    placePlayerShips(playerOneBoard);
 }

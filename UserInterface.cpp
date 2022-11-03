@@ -36,7 +36,7 @@ void mainMenu() {
 
 void newGame() {
     system("cls");
-    cout << "Choose gameMode" << endl;
+    cout << "Choose game mode" << endl;
     cout << DIVIDER << endl;
     cout << "[1] Singleplayer" << endl;
     cout << "[2] Multiplayer" << endl;
@@ -88,10 +88,11 @@ void showSingleplayerInstructions() {
     while (menuInput != 0) {
         cout << "Singleplayer Instructions" << endl;
         cout << DIVIDER << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
+        cout << "Upon starting a singleplayer game, the computer" << endl;
+        cout << "will place ships randomly on the game board." << endl;
+        cout << "Your goal is to sink these ships in" << endl;
+        cout << "as little shots as possible, or as" << endl;
+        cout << "quick as possible, depending on the mode." << endl;
         cout << "[0] Go back" << endl;
         cout << DIVIDER << endl;
         cin >> menuInput;
@@ -104,10 +105,7 @@ void showMultiplayerInstructions() {
     while (menuInput != 0) {
         cout << "Multiplayer Instructions" << endl;
         cout << DIVIDER << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
+        cout << "Under construction" << endl;
         cout << "[0] Go back" << endl;
         cout << DIVIDER << endl;
         cin >> menuInput;
@@ -143,10 +141,7 @@ void showSingleplayerStats() {
     while (menuInput != 0) {
         cout << "Singleplayer Statistics" << endl;
         cout << DIVIDER << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
+        cout << "Under Construction" << endl;
         cout << "[0] Go back" << endl;
         cout << DIVIDER << endl;
         cin >> menuInput;
@@ -159,10 +154,7 @@ void showMultiplayerStats() {
     while (menuInput != 0) {
         cout << "Multiplayer Statistics" << endl;
         cout << DIVIDER << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
-        cout << "..." << endl;
+        cout << "Under Construction" << endl;
         cout << "[0] Go back" << endl;
         cout << DIVIDER << endl;
         cin >> menuInput;
