@@ -1,0 +1,3 @@
+numberOfGamesPlayed: 0
+lowestShots: 0
+fastestGame: 0

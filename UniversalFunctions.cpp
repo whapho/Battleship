@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void fire(string coord, int *board) {
+bool fire(string coord, int *board, int mode) {
     char letter;
     int x, y = 0;
     letter = coord[0];
@@ -42,10 +42,20 @@ void fire(string coord, int *board) {
         default:
             break;
     }
-    if (*(board + (x-1) * COLS + (y-1)) == 0)
-        *(board + (x-1) * COLS + (y-1)) = 2;
-    else
-        *(board + (x-1) * COLS + (y-1)) = 3;
+    if (mode == 0) {
+        if (*(board + (x-1) * COLS + (y-1)) == 0 || *(board + (x-1) * COLS + (y-1)) == 2)
+            *(board + (x-1) * COLS + (y-1)) = 2;
+        else
+            *(board + (x-1) * COLS + (y-1)) = 3;
+    } else {
+        if (*(board + (x-1) * COLS + (y-1)) == 0 || *(board + (x-1) * COLS + (y-1)) == 6) {
+            *(board + (x-1) * COLS + (y-1)) = 6;
+            return false;
+        } else {
+            *(board + (x-1) * COLS + (y-1)) = 7;
+            return true;
+        }
+    }
 }
 
 bool checkForShips(int *board) {

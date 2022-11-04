@@ -1,12 +1,6 @@
 #include "Battleship.h"
-#include <iostream>
 
 using namespace std;
-
-const string DISPLAY[10] = {
-        " 1 ", " 2 ", " 3 ", " 4 ", " 5 ",
-        " 6 ", " 7 ", " 8 ", " 9 ", "10 "
-};
 
 int* gameBoard = new int[ROWS * COLS];
 
@@ -83,7 +77,7 @@ void startSingleplayerGame() {
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> coord;
-        fire(coord, gameBoard);
+        fire(coord, gameBoard, 0);
         cout << gameOver(gameBoard, 0);
     }
     do {

@@ -1,12 +1,6 @@
 #include "Battleship.h"
-#include <iostream>
 
 using namespace std;
-
-const string DISPLAY[10] = {
-        " 1 ", " 2 ", " 3 ", " 4 ", " 5 ",
-        " 6 ", " 7 ", " 8 ", " 9 ", "10 "
-};
 
 int* playerOneBoard = new int[ROWS * COLS];
 int* playerTwoBoard = new int[ROWS * COLS];
@@ -168,9 +162,65 @@ void placePlayerShips(int *board) {
     }
 }
 
-
 void startMultiplayerGame() {
     createPlayerBoard(playerOneBoard);
     createPlayerBoard(playerTwoBoard);
+    int input;
+    string coords;
+    do {
+        system("cls");
+        cout << "Player 1's turn to place ships. Player 2 look away!" << endl;
+        cout << "[0] Ready?" << endl;
+        input = 1;
+        cin >> input;
+    } while (input != 0);
     placePlayerShips(playerOneBoard);
+    do {
+        system("cls");
+        cout << "Player 2's turn to place ships. Player 1 look away!" << endl;
+        cout << "[0] Ready?" << endl;
+        input = 1;
+        cin >> input;
+    } while (input != 0);
+    placePlayerShips(playerTwoBoard);
+    do {
+        for (int turn = 0; turn < 200; turn++) {
+            if (turn % 2 == 0) {
+                do {
+                    system("cls");
+                    cout << "Player 1's turn to fire." << endl;
+                    cout << "[0] Ready" << endl;
+                    input = 1;
+                    cin >> input;
+                } while (input != 0);
+                system("cls");
+                do {
+                    displayPlayerBoard(playerTwoBoard, true);
+                    cout << "Enter coordinates: ";
+                    cin >> coords;
+                    fire(coords, playerTwoBoard, 1);
+                    cout << fire(coords, playerTwoBoard, 1);
+                } while (fire(coords, playerTwoBoard, 1));
+            } else if (turn % 2 == 1) {
+                do {
+                    system("cls");
+                    cout << "Player 2's turn to fire." << endl;
+                    cout << "[0] Ready" << endl;
+                    input = 1;
+                    cin >> input;
+                } while (input != 0);
+                system("cls");
+                do {
+                    displayPlayerBoard(playerOneBoard, true);
+                    cout << "Enter coordinates: ";
+                    cin >> coords;
+                    fire(coords, playerOneBoard, 1);
+                    cout << fire(coords, playerOneBoard, 1);
+                } while (fire(coords, playerOneBoard, 1));
+            }
+        }
+        cout << gameOver(playerOneBoard, 1) << gameOver(playerTwoBoard, 1);
+    }while (!gameOver(playerOneBoard, 1) || !gameOver(playerTwoBoard, 1));
 }
+//A1 A2 B1 B2 B3 C1 C2 C3 D1 D2 D3 D4 E1 E2 E3 E4 E5
+//1 2 0 V A1 V B1 V C1 V D1 V E1 0 0 V A1 V B1 V C1 V D1 V E1 0

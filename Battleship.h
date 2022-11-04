@@ -1,5 +1,10 @@
 #pragma once
-#include<string>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <cstdio>
+#include <ctime>
+#include <stdio.h>
 void mainMenu();
 void showInstructions();
 void newGame();
@@ -19,6 +24,13 @@ void showStatMenu();
 void showSingleplayerStats();
 void showMultiplayerStats();
 void aimbot(int *board);
-void fire(std::string coord, int *board);
+bool fire(std::string coord, int *board, int mode);
+void createGameLog();
+std::string getFormattedTime();
+void writePlayerBoards();
 const int SHIP_LENGTHS[5] = {2,3,3,4,5};
 const int ROWS = 10, COLS = 10;
+const std::string DISPLAY[10] = {
+        " 1 ", " 2 ", " 3 ", " 4 ", " 5 ",
+        " 6 ", " 7 ", " 8 ", " 9 ", "10 "
+};
