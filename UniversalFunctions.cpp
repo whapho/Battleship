@@ -1,6 +1,9 @@
 #include "Battleship.h"
 
-using namespace std;
+void clear() {
+//    system("cls");
+    cout << endl << "Clear" << endl;
+}
 
 bool fire(string coord, int *board, int mode) {
     char letter;
@@ -75,7 +78,7 @@ bool gameOver(int *board, int mode) {
     int count = 0, hit;
     if (mode == 0)
         hit = 3;
-    else
+    else if (mode == 1)
         hit = 7;
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
@@ -93,7 +96,14 @@ void aimbot(int *board) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             if (*(board + i * COLS + j) == 1)
-                *(board + i * COLS + j) = 7;
+                *(board + i * COLS + j) = 3;
         }
     }
+}
+
+std::string returnCurrentTimeAndDate() {
+    auto t = std::time(nullptr);
+    stringstream stream;
+    stream << std::put_time(localtime(&t), "%Y-%m-%d_%H:%M:%S");
+    return stream.str();
 }

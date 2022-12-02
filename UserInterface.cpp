@@ -1,17 +1,14 @@
 #include "Battleship.h"
 
-using namespace std;
-
 int menuInput;
-const string DIVIDER = "----------------------------------------";
 
 void mainMenu() {
-    system("cls");
+    clear();
     cout << "Battleship by whapho" << endl;
     cout << DIVIDER << endl;
     cout << "[1] New Game" << endl;
     cout << "[2] Instructions" << endl;
-    cout << "[3] Statistics" << endl;
+    cout << "[3] Game Logs" << endl;
     cout << "[0] Close Game" << endl;
     cout << DIVIDER << endl;
     cin >> menuInput;
@@ -26,7 +23,7 @@ void mainMenu() {
             showInstructions();
             break;
         case 3:
-            showStatMenu();
+            showGamelogMenu();
             break;
         default:
             break;
@@ -34,7 +31,7 @@ void mainMenu() {
 }
 
 void newGame() {
-    system("cls");
+    clear();
     cout << "Choose game mode" << endl;
     cout << DIVIDER << endl;
     cout << "[1] Singleplayer" << endl;
@@ -59,7 +56,7 @@ void newGame() {
 }
 
 void showInstructions() {
-    system("cls");
+    clear();
     cout << "Instructions" << endl;
     cout << DIVIDER << endl;
     cout << "[1] PvE instructions" << endl;
@@ -83,7 +80,7 @@ void showInstructions() {
 }
 
 void showSingleplayerInstructions() {
-    system("cls");
+    clear();
     while (menuInput != 0) {
         cout << "Singleplayer Instructions" << endl;
         cout << DIVIDER << endl;
@@ -100,7 +97,7 @@ void showSingleplayerInstructions() {
 }
 
 void showMultiplayerInstructions() {
-    system("cls");
+    clear();
     while (menuInput != 0) {
         cout << "Multiplayer Instructions" << endl;
         cout << DIVIDER << endl;
@@ -111,12 +108,11 @@ void showMultiplayerInstructions() {
     }
     showInstructions();
 }
-void showStatMenu() {
-    system("cls");
+void showGamelogMenu() {
+    clear();
     cout << "Statistics" << endl;
     cout << DIVIDER << endl;
-    cout << "[1] Singleplayer Statistics" << endl;
-    cout << "[2] Multiplayer Statistics" << endl;
+    cout << "[1]";
     cout << "[0] Go back" << endl;
     cout << DIVIDER << endl;
     cin >> menuInput;
@@ -124,44 +120,15 @@ void showStatMenu() {
         case 0:
             mainMenu();
             break;
-        case 1:
-            showSingleplayerStats();
-            break;
-        case 2:
-            showMultiplayerStats();
-            break;
         default:
             break;
     }
 }
 
-void showSingleplayerStats() {
-    system("cls");
-    while (menuInput != 0) {
-        cout << "Singleplayer Statistics" << endl;
-        cout << DIVIDER << endl;
-        cout << "Under Construction" << endl;
-        cout << "[0] Go back" << endl;
-        cout << DIVIDER << endl;
-        cin >> menuInput;
-    }
-    showStatMenu();
-}
-
-void showMultiplayerStats() {
-    system("cls");
-    while (menuInput != 0) {
-        cout << "Multiplayer Statistics" << endl;
-        cout << DIVIDER << endl;
-        cout << "Under Construction" << endl;
-        cout << "[0] Go back" << endl;
-        cout << DIVIDER << endl;
-        cin >> menuInput;
-    }
-    showStatMenu();
-}
-
 int main() {
     srand(time(0));
+    ofstream fout;
+    fout.open ("gamelog.txt",ios::app);
     mainMenu();
+    fout.close();
 }

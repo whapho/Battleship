@@ -1,7 +1,5 @@
 #include "Battleship.h"
 
-using namespace std;
-
 int* gameBoard = new int[ROWS * COLS];
 
 void createGameBoard() {
@@ -13,9 +11,9 @@ void createGameBoard() {
 }
 
 void displayGameBoard() {
-    system("cls");
+    clear();
     int num;
-    cout << "   A B C D E F G H I J" << endl;
+    cout << BOARD_HEADER << endl;
     for (int i = 0; i < ROWS; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < COLS; j++) {
@@ -68,20 +66,24 @@ void placeRandomShips() {
 }
 
 void startSingleplayerGame() {
+    ofstream fout;
+    fout.open ("stats.txt",ios::app);
+    fout << "whaphoSP" << endl;
     int input = 1;
     string coord;
     createGameBoard();
     placeRandomShips();
     while (!gameOver(gameBoard, 0)) {
-        system("cls");
+        clear();
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> coord;
         fire(coord, gameBoard, 0);
+        aimbot(gameBoard);
         cout << gameOver(gameBoard, 0);
     }
     do {
-        system("cls");
+        clear();
         displayGameBoard();
         cout << "You win!" << endl;
         cout << "[0] Done" << endl;

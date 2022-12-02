@@ -1,7 +1,5 @@
 #include "Battleship.h"
 
-using namespace std;
-
 int* playerOneBoard = new int[ROWS * COLS];
 int* playerTwoBoard = new int[ROWS * COLS];
 
@@ -13,10 +11,166 @@ void createPlayerBoard(int *board) {
     }
 }
 
-void displayPlayerBoard(int *board, bool hidden) {
-    system("cls");
+void displayFinalBoards() {
     int num;
-    cout << "   A B C D E F G H I J" << endl;
+    cout << BOARD_HEADER << " | " << BOARD_HEADER << endl;
+    for (int i = 0; i < 10; i++) {
+        cout << DISPLAY[i];
+        for (int j = 0; j < 10; j++) {
+            num = *(playerOneBoard + i * COLS + j);
+            switch (num) {
+                case 0:
+                    cout << "* ";
+                    break;
+                case 1:
+                    cout << "1 ";
+                    break;
+                case 2:
+                    cout << "2 ";
+                    break;
+                case 3:
+                    cout << "3 ";
+                    break;
+                case 4:
+                    cout << "4 ";
+                    break;
+                case 5:
+                    cout << "5 ";
+                    break;
+                case 6:
+                    cout << "M ";
+                    break;
+                case 7:
+                    cout << "H ";
+                    break;
+                default:
+                    cout << num << " ";
+                    break;
+            }
+        }
+        cout << "| ";
+        cout << DISPLAY[i];
+        for (int j = 0; j < 10; j++) {
+            num = *(playerTwoBoard + i * COLS + j);
+            switch (num) {
+                case 0:
+                    cout << "* ";
+                    break;
+                case 1:
+                    cout << "1 ";
+                    break;
+                case 2:
+                    cout << "2 ";
+                    break;
+                case 3:
+                    cout << "3 ";
+                    break;
+                case 4:
+                    cout << "4 ";
+                    break;
+                case 5:
+                    cout << "5 ";
+                    break;
+                case 6:
+                    cout << "M ";
+                    break;
+                case 7:
+                    cout << "H ";
+                    break;
+                default:
+                    cout << num << " ";
+                    break;
+            }
+        }
+        cout << endl;
+    }
+    cout << DIVIDER << endl;
+}
+
+void writeFinalBoards() {
+    ofstream fout;
+    fout.open("gamelog.txt", ios::app);
+    fout << "Game played at: " << returnCurrentTimeAndDate() << endl;
+    fout << DIVIDER << endl;
+    int num;
+    fout << BOARD_HEADER << " | " << BOARD_HEADER << endl;
+    for (int i = 0; i < 10; i++) {
+        fout << DISPLAY[i];
+        for (int j = 0; j < 10; j++) {
+            num = *(playerOneBoard + i * COLS + j);
+            switch (num) {
+                case 0:
+                    fout << "* ";
+                    break;
+                case 1:
+                    fout << "1 ";
+                    break;
+                case 2:
+                    fout << "2 ";
+                    break;
+                case 3:
+                    fout << "3 ";
+                    break;
+                case 4:
+                    fout << "4 ";
+                    break;
+                case 5:
+                    fout << "5 ";
+                    break;
+                case 6:
+                    fout << "M ";
+                    break;
+                case 7:
+                    fout << "H ";
+                    break;
+                default:
+                    fout << num << " ";
+                    break;
+            }
+        }
+        fout << "| ";
+        fout << DISPLAY[i];
+        for (int j = 0; j < 10; j++) {
+            num = *(playerTwoBoard + i * COLS + j);
+            switch (num) {
+                case 0:
+                    fout << "* ";
+                    break;
+                case 1:
+                    fout << "1 ";
+                    break;
+                case 2:
+                    fout << "2 ";
+                    break;
+                case 3:
+                    fout << "3 ";
+                    break;
+                case 4:
+                    fout << "4 ";
+                    break;
+                case 5:
+                    fout << "5 ";
+                    break;
+                case 6:
+                    fout << "M ";
+                    break;
+                case 7:
+                    fout << "H ";
+                    break;
+                default:
+                    fout << num << " ";
+                    break;
+            }
+        }
+        fout << endl;
+    }
+    fout << DIVIDER << endl;
+}
+
+void displayPlayerBoard(int *board, bool hidden) {
+    clear();
+    int num;
+    cout << BOARD_HEADER << endl;
     for (int i = 0; i < 10; i++) {
         cout << DISPLAY[i];
         for (int j = 0; j < 10; j++) {
@@ -88,7 +242,7 @@ void displayPlayerBoard(int *board, bool hidden) {
 }
 
 void placePlayerShips(int *board) {
-    system("cls");
+    clear();
     displayPlayerBoard(board, false);
     int input = 1;
     for (int i = 0; i < sizeof(SHIP_LENGTHS)/sizeof(SHIP_LENGTHS[0]); i++) {
@@ -144,7 +298,7 @@ void placePlayerShips(int *board) {
             else if (orientation == "V")
                 x++;
         }
-        system("cls");
+        clear();
         displayPlayerBoard(board, false);
     }
     while (input != 0) {
@@ -168,7 +322,7 @@ void startMultiplayerGame() {
     int input;
     string coords;
     do {
-        system("cls");
+        clear();
         cout << "Player 1's turn to place ships. Player 2 look away!" << endl;
         cout << "[0] Ready?" << endl;
         input = 1;
@@ -176,7 +330,7 @@ void startMultiplayerGame() {
     } while (input != 0);
     placePlayerShips(playerOneBoard);
     do {
-        system("cls");
+        clear();
         cout << "Player 2's turn to place ships. Player 1 look away!" << endl;
         cout << "[0] Ready?" << endl;
         input = 1;
@@ -184,43 +338,55 @@ void startMultiplayerGame() {
     } while (input != 0);
     placePlayerShips(playerTwoBoard);
     do {
-        for (int turn = 0; turn < 200; turn++) {
-            if (turn % 2 == 0) {
-                do {
-                    system("cls");
-                    cout << "Player 1's turn to fire." << endl;
-                    cout << "[0] Ready" << endl;
-                    input = 1;
-                    cin >> input;
-                } while (input != 0);
-                system("cls");
-                do {
-                    displayPlayerBoard(playerTwoBoard, true);
-                    cout << "Enter coordinates: ";
-                    cin >> coords;
-                    fire(coords, playerTwoBoard, 1);
-                    cout << fire(coords, playerTwoBoard, 1);
-                } while (fire(coords, playerTwoBoard, 1));
-            } else if (turn % 2 == 1) {
-                do {
-                    system("cls");
-                    cout << "Player 2's turn to fire." << endl;
-                    cout << "[0] Ready" << endl;
-                    input = 1;
-                    cin >> input;
-                } while (input != 0);
-                system("cls");
-                do {
-                    displayPlayerBoard(playerOneBoard, true);
-                    cout << "Enter coordinates: ";
-                    cin >> coords;
-                    fire(coords, playerOneBoard, 1);
-                    cout << fire(coords, playerOneBoard, 1);
-                } while (fire(coords, playerOneBoard, 1));
-            }
+        do {
+            clear();
+            cout << "Player 1's turn to fire." << endl;
+            cout << "[0] Ready" << endl;
+            input = 1;
+            cin >> input;
+        } while (input != 0);
+        clear();
+        do {
+            displayPlayerBoard(playerTwoBoard, true);
+            cout << "Enter coordinates: ";
+            cin >> coords;
+            fire(coords, playerTwoBoard, 1);
+            cout << fire(coords, playerTwoBoard, 1) << endl;
+            cout << gameOver(playerTwoBoard, 1) << endl;
+        } while (fire(coords, playerTwoBoard, 1));
+        if (gameOver(playerOneBoard, 1)) {
+            break;
         }
-        cout << gameOver(playerOneBoard, 1) << gameOver(playerTwoBoard, 1);
-    }while (!gameOver(playerOneBoard, 1) || !gameOver(playerTwoBoard, 1));
+        do {
+            clear();
+            cout << "Player 2's turn to fire." << endl;
+            cout << "[0] Ready" << endl;
+            input = 1;
+            cin >> input;
+        } while (input != 0);
+        clear();
+        do {
+            displayPlayerBoard(playerOneBoard, true);
+            cout << "Enter coordinates: ";
+            cin >> coords;
+            fire(coords, playerOneBoard, 1);
+            cout << fire(coords, playerOneBoard, 1) << endl;
+            cout << gameOver(playerOneBoard, 1);
+        } while (fire(coords, playerOneBoard, 1));
+        cout << gameOver(playerOneBoard, 1) << " " << gameOver(playerTwoBoard, 1);
+    } while (!gameOver(playerOneBoard, 1) || !gameOver(playerTwoBoard, 1));
+    do {
+        clear();
+        displayFinalBoards();
+        if (gameOver(playerTwoBoard, 1)) {
+            cout << "Player 1 wins!" << endl;
+        } else {
+            cout << "Player 2 wins!" << endl;
+        }
+        cout << "[0] Done" << endl;
+        cin >> input;
+    } while (input != 0);
+    writeFinalBoards();
 }
 //A1 A2 B1 B2 B3 C1 C2 C3 D1 D2 D3 D4 E1 E2 E3 E4 E5
-//1 2 0 V A1 V B1 V C1 V D1 V E1 0 0 V A1 V B1 V C1 V D1 V E1 0
+//1 2 0 V A1 V B1 V C1 V D1 V E1 0 0 V A1 V B1 V C1 V D1 V E1 0 0 A1 A2 B1 B2 B3 C1 C2 C3 D1 D2 D3 D4 E1 E2 E3 E4 E5
