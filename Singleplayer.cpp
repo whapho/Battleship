@@ -39,7 +39,7 @@ void displayGameBoard() {
     }
 }
 
-void placeRandomShips() {
+void placeRandomShips(int *board) {
     for (int i = 0; i < sizeof(SHIP_LENGTHS)/sizeof(SHIP_LENGTHS[0]); i++) {
         int orientation = rand() % 2;
         int x, y, shipLength = SHIP_LENGTHS[i];
@@ -52,34 +52,30 @@ void placeRandomShips() {
             y = rand() % 10;
         }
         for (int j = 0; j < shipLength; j++) {
-            *(gameBoard + x * COLS + y) = 1;
+            *(board + x * COLS + y) = 1;
             if (orientation == 0)
                 y++;
             else if (orientation == 1)
                 x++;
         }
     }
-    if (!checkForShips(gameBoard)) {
+    if (!checkForShips(board)) {
         createGameBoard();
-        placeRandomShips();
+        placeRandomShips(board);
     }
 }
 
 void startSingleplayerGame() {
-    ofstream fout;
-    fout.open ("stats.txt",ios::app);
-    fout << "whaphoSP" << endl;
     int input = 1;
     string coord;
     createGameBoard();
-    placeRandomShips();
+    placeRandomShips(gameBoard);
     while (!gameOver(gameBoard, 0)) {
         clear();
         displayGameBoard();
         cout << "Enter coordinates: ";
         cin >> coord;
         fire(coord, gameBoard, 0);
-        aimbot(gameBoard);
         cout << gameOver(gameBoard, 0);
     }
     do {

@@ -90,7 +90,7 @@ void displayFinalBoards() {
 void writeFinalBoards() {
     ofstream fout;
     fout.open("gamelog.txt", ios::app);
-    fout << "Game played at: " << returnCurrentTimeAndDate() << endl;
+    fout << "Multiplayer game played at: " << getCurrentDateAndTime() << endl;
     fout << DIVIDER << endl;
     int num;
     fout << BOARD_HEADER << " | " << BOARD_HEADER << endl;
@@ -165,6 +165,7 @@ void writeFinalBoards() {
         fout << endl;
     }
     fout << DIVIDER << endl;
+    fout.close();
 }
 
 void displayPlayerBoard(int *board, bool hidden) {
@@ -337,7 +338,7 @@ void startMultiplayerGame() {
         cin >> input;
     } while (input != 0);
     placePlayerShips(playerTwoBoard);
-    do {
+    for (int i = 0; i < 200; i++) {
         do {
             clear();
             cout << "Player 1's turn to fire." << endl;
@@ -352,11 +353,10 @@ void startMultiplayerGame() {
             cin >> coords;
             fire(coords, playerTwoBoard, 1);
             cout << fire(coords, playerTwoBoard, 1) << endl;
-            cout << gameOver(playerTwoBoard, 1) << endl;
+            if (gameOver(playerTwoBoard, 1))
+                goto endloop;
         } while (fire(coords, playerTwoBoard, 1));
-        if (gameOver(playerOneBoard, 1)) {
-            break;
-        }
+
         do {
             clear();
             cout << "Player 2's turn to fire." << endl;
@@ -371,22 +371,26 @@ void startMultiplayerGame() {
             cin >> coords;
             fire(coords, playerOneBoard, 1);
             cout << fire(coords, playerOneBoard, 1) << endl;
-            cout << gameOver(playerOneBoard, 1);
+            if (gameOver(playerOneBoard, 1))
+                goto endloop;
         } while (fire(coords, playerOneBoard, 1));
-        cout << gameOver(playerOneBoard, 1) << " " << gameOver(playerTwoBoard, 1);
-    } while (!gameOver(playerOneBoard, 1) || !gameOver(playerTwoBoard, 1));
+    }
+    endloop:
+    clear();
+    displayFinalBoards();
     do {
-        clear();
-        displayFinalBoards();
-        if (gameOver(playerTwoBoard, 1)) {
-            cout << "Player 1 wins!" << endl;
-        } else {
-            cout << "Player 2 wins!" << endl;
-        }
-        cout << "[0] Done" << endl;
+        if (gameOver(playerOneBoard, 1))
+            cout << "Player 2 wins!!!" << endl;
+        else if (gameOver(playerTwoBoard, 1))
+            cout << "Player 1 wins!!!" << endl;
+        else
+            cout << "Draw";
+        cout << "[0] Continue to main menu" << endl;
+        input = 1;
         cin >> input;
     } while (input != 0);
     writeFinalBoards();
+    mainMenu();
 }
 //A1 A2 B1 B2 B3 C1 C2 C3 D1 D2 D3 D4 E1 E2 E3 E4 E5
 //1 2 0 V A1 V B1 V C1 V D1 V E1 0 0 V A1 V B1 V C1 V D1 V E1 0 0 A1 A2 B1 B2 B3 C1 C2 C3 D1 D2 D3 D4 E1 E2 E3 E4 E5

@@ -3,4 +3,4 @@ project(Battleship)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Battleship UserInterface.cpp Singleplayer.cpp Battleship.h Multiplayer.cpp UniversalFunctions.cpp)
+add_executable(Battleship UserInterface.cpp Singleplayer.cpp Battleship.h Multiplayer.cpp UniversalFunctions.cpp GameLogs.cpp)

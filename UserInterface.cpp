@@ -4,7 +4,7 @@ int menuInput;
 
 void mainMenu() {
     clear();
-    cout << "Battleship by whapho" << endl;
+    cout << "Battleship by Max Gerew" << endl;
     cout << DIVIDER << endl;
     cout << "[1] New Game" << endl;
     cout << "[2] Instructions" << endl;
@@ -101,7 +101,11 @@ void showMultiplayerInstructions() {
     while (menuInput != 0) {
         cout << "Multiplayer Instructions" << endl;
         cout << DIVIDER << endl;
-        cout << "Under construction" << endl;
+        cout << "Upon starting a multiplayer game, player 1 will be prompted" << endl;
+        cout << "to place their ships. Once they are finished, it will be player 2's turn" << endl;
+        cout << "to place their ships. After that, the game will start, and both players will" << endl;
+        cout << "take turns shooting at each other. Once the game concludes, you can see" << endl;
+        cout << "the final board in the game logs menu." << endl;
         cout << "[0] Go back" << endl;
         cout << DIVIDER << endl;
         cin >> menuInput;
@@ -110,25 +114,22 @@ void showMultiplayerInstructions() {
 }
 void showGamelogMenu() {
     clear();
-    cout << "Statistics" << endl;
+    int choice;
+    cout << "Game Logs" << endl;
     cout << DIVIDER << endl;
-    cout << "[1]";
+    getGamesPlayed();
     cout << "[0] Go back" << endl;
     cout << DIVIDER << endl;
-    cin >> menuInput;
-    switch (menuInput) {
-        case 0:
-            mainMenu();
-            break;
-        default:
-            break;
+    cout << "Enter choice: ";
+    cin >> choice;
+    if (choice != 0) {
+        getGameBoards(choice);
+    } else {
+        mainMenu();
     }
 }
 
 int main() {
     srand(time(0));
-    ofstream fout;
-    fout.open ("gamelog.txt",ios::app);
     mainMenu();
-    fout.close();
 }
